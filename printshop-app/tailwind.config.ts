@@ -7,6 +7,12 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1964px",
+    },
     extend: {
       colors: {
         background: "var(--background)",
@@ -16,4 +22,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;
