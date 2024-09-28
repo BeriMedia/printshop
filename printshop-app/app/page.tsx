@@ -5,6 +5,10 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
+/* import of necessary api components */
+import { client } from "./../lib/shopifyAPIclient";
+import { productQuery } from "./../lib/queries/previewQuery";
+
 import titleImage from "../public/landingPageImg/titleImage.jpg";
 import rightImage from "../public/landingPageImg/Kran.jpg";
 import leftImage from "../public/landingPageImg/Dresden.jpg";
@@ -19,7 +23,13 @@ import PhotoCredit from "./components/photoCredit";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
-export default function Home() {
+const Home = async () => {
+  const {data, errors, extensions} = await client.request(productQuery, {
+    variables: {
+      handle: 'abstrakt-b-w',
+    },
+  });
+  console.log("🚀 ~ Home ~ data:", data)
   return (
     <div
       className={`relative ${montserrat.className} text-lg text-black md:text-2xl bg-white`}
@@ -149,3 +159,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;
