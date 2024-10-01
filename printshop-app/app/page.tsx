@@ -5,9 +5,8 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
-/* import of necessary api components */
-import { client } from "./../lib/shopifyAPIclient";
-import { productQuery } from "./../lib/queries/previewQuery";
+// import of necessary api components
+import {fetchProductByHandle} from "./../lib/shopifyAPIclient"
 
 import titleImage from "../public/landingPageImg/titleImage.jpg";
 import rightImage from "../public/landingPageImg/Kran.jpg";
@@ -24,13 +23,9 @@ import PhotoCredit from "./components/photoCredit";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 const Home = async () => {
-  const {data, errors, extensions} = await client.request(productQuery, {
-    variables: {
-      handle: 'abstrakt-b-w',
-    },
-  });
-  console.log("🚀 ~ Home ~ data:", data)
-  return (
+  // TODO: Anfrage nach den neuesten 9 Produkten stellen
+  const productData = await fetchProductByHandle('abstrakt-b-w');
+  console.log(productData);  return (
     <div
       className={`relative ${montserrat.className} text-lg text-black md:text-2xl bg-white`}
     >
@@ -80,12 +75,6 @@ const Home = async () => {
             ctaButtonText="Fotograf:innen"
             ctaLinkText=""
           ></TransparentBox>
-        </div>
-      </section>
-      {/* Blog Posts */}
-      <section className="relative w-full h-full mt-16 p-4 flex flex-col items-center justify-center">
-        <div className="w-full">
-          <BlogPostCard ctaButtonText="Explore" ctaLinkText=""></BlogPostCard>
         </div>
       </section>
       {/* Kontakt */}
