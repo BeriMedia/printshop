@@ -8,6 +8,7 @@ export const productQuery = `
     }
   }
 `;
+// TODO: get the first 9 Products
 
 // get product media
 export const productMediaQuery = `
